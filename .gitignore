@@ -17,3 +17,4 @@ frontend/insta-frontend/dist/
 # System files
 .DS_Store
 Thumbs.db
+backend/cookies/instagram.txt
