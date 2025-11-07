@@ -16,23 +16,37 @@ TMP = tempfile.gettempdir()
 # ────────────────────────────────────────────────
 @app.route("/api/fetch", methods=["POST"])
 def fetch():
-    data = request.get_json() or {}
-    url = data.get("url")
-    if not url:
-        return jsonify({"error": "No URL provided"}), 400
-
     try:
-        ydl_opts = {"quiet": True, "skip_download": True}
+        data = request.get_json()
+        url = data.get("url")
+        if not url:
+            return jsonify({"error": "URL missing"}), 400
+
+        cookies_path = os.path.join(os.path.dirname(__file__), "cookies", "instagram.txt")
+
+        ydl_opts = {
+            "quiet": True,
+            "skip_download": True,
+            "extract_flat": False,
+            "noplaylist": True,
+            "geo_bypass": True,
+            "cookies": cookies_path if os.path.exists(cookies_path) else None,
+        }
+
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
-        return jsonify({
-            "title": info.get("title"),
-            "thumbnail": info.get("thumbnail"),
-            "original_url": url
-        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
+        result = {
+            "title": info.get("title"),
+            "uploader": info.get("uploader"),
+            "thumbnail": info.get("thumbnail"),
+            "original_url": url,
+        }
+        return jsonify(result)
+
+    except Exception as e:
+        print("Error in /api/fetch:", e)
+        return jsonify({"error": str(e)}), 500
 
 # ────────────────────────────────────────────────
 # 2️⃣  Download video using yt-dlp
