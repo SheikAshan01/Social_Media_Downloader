@@ -3,7 +3,11 @@ from flask_cors import CORS
 import yt_dlp, tempfile, os, uuid, subprocess, requests
 
 app = Flask(__name__)
-CORS(app, origins=["https://social-media-downloader-gamma.vercel.app/"])
+CORS(app, resources={r"/api/*": {"origins": [
+    "http://localhost:5173",
+    "https://social-media-downloader-gamma.vercel.app",
+    "https://social-media-downloader.vercel.app"
+]}}, supports_credentials=True)
 TMP = tempfile.gettempdir()
 
 
