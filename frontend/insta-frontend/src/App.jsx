@@ -11,12 +11,13 @@ function App() {
   const [downloading, setDownloading] = useState("");
   const [progress, setProgress] = useState(0); // ✅ progress state added
   const [completed, setCompleted] = useState(false);
+  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5001";
 
   const handleFetch = async () => {
     if (!url.trim()) return toast.error("Please paste a valid Instagram URL!");
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5001/api/fetch", {
+      const res = await fetch(`${API_BASE}/api/fetch`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
@@ -65,7 +66,7 @@ function App() {
         : `/api/download_audio?url=${encodeURIComponent(data.original_url)}`;
 
     try {
-      const response = await fetch(`http://localhost:5001${endpoint}`);
+      const response = await fetch(`${API_BASE}${endpoint}`);
       if (!response.ok) throw new Error("Failed to download file");
 
       const contentLength = response.headers.get("Content-Length");
@@ -160,7 +161,7 @@ function App() {
         {data && (
           <div className="text-center">
             <img
-              src={`http://localhost:5001/api/proxy_image?url=${encodeURIComponent(
+              src={`${API_BASE}/api/proxy_image?url=${encodeURIComponent(
                 data.thumbnail
               )}`}
               alt="Thumbnail"
