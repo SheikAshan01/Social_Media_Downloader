@@ -22,7 +22,15 @@ def fetch():
         if not url:
             return jsonify({"error": "URL missing"}), 400
 
-        cookies_path = os.path.join(os.path.dirname(__file__), "cookies", "instagram.txt")
+        secret_path = "/etc/secrets/instagram.txt"
+        local_path = os.path.join(os.path.dirname(__file__), "cookies", "instagram.txt")
+        
+        if os.path.exists(secret_path):
+            cookies_path = secret_path
+        else:
+            cookies_path = local_path
+            
+        print("Using cookies from:", cookies_path, "Exists?", os.path.exists(cookies_path))
 
         ydl_opts = {
             "quiet": True,
