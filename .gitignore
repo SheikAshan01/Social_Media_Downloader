@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Environment folders
+venv/
+backend/venv/
+.env
+
+# Node modules
+frontend/insta-frontend/node_modules/
+frontend/insta-frontend/dist/
+
+# System files
+.DS_Store
+Thumbs.db

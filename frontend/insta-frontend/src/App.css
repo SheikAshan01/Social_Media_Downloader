@@ -1,0 +1,123 @@
+/* 🌟 Core Layout */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* 🌀 Animated Background */
+body {
+  background: linear-gradient(135deg, #1e1b4b, #312e81, #4c1d95);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🧠 Logo Effects */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter, transform;
+  transition: all 0.3s ease-in-out;
+  filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.5));
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 1.5em #c084fc);
+}
+
+/* Optional: If your logo spins (React/Vite style) */
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo.spin {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* 🧩 Card container */
+.card {
+  padding: 2em;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 35px rgba(192, 132, 252, 0.7);
+}
+
+/* 📘 Footer Text (Optional small info text) */
+.read-the-docs {
+  color: #aaa;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+/* 🌈 Button Gradient Animation */
+.bg-indigo-500 {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7, #6366f1);
+  background-size: 200% 200%;
+  animation: moveGradient 3s ease infinite;
+  transition: all 0.3s ease-in-out;
+}
+
+.bg-indigo-500:hover {
+  filter: brightness(1.2);
+  transform: scale(1.03);
+}
+
+@keyframes moveGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* ⚡ Flowing Gradient Bar (used in progress bar) */
+@keyframes move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* ✨ Smooth Scroll and Consistent Look */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 🌟 Glowing Pulse Animation for Logo */
+@keyframes logo-glow {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4))
+            drop-shadow(0 0 20px rgba(255, 215, 0, 0.2));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8))
+            drop-shadow(0 0 40px rgba(255, 215, 0, 0.5));
+    transform: scale(1.05);
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4))
+            drop-shadow(0 0 20px rgba(255, 215, 0, 0.2));
+    transform: scale(1);
+  }
+}
+
+.logo.glow {
+  animation: logo-glow 3s ease-in-out infinite;
+  transition: all 0.3s ease-in-out;
+}
+
