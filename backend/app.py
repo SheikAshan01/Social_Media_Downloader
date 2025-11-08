@@ -1,6 +1,22 @@
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
-import yt_dlp, tempfile, os, uuid, subprocess, requests
+import os
+import shutil
+import tempfile
+
+# Read-only secret file path on Render
+secret_cookie_path = "/etc/secrets/instagram.txt"
+
+# Create a temporary copy (Render /tmp is writable)
+temp_cookie_path = tempfile.gettempdir() + "/instagram.txt"
+
+if os.path.exists(secret_cookie_path):
+    shutil.copy(secret_cookie_path, temp_cookie_path)
+    print(f"✅ Using cookies from secret, copied to {temp_cookie_path}")
+else:
+    print("⚠️ Secret cookie file not found!")
+    temp_cookie_path = None
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": [
@@ -38,7 +54,7 @@ def fetch():
             "extract_flat": False,
             "noplaylist": True,
             "geo_bypass": True,
-            "cookiefile": cookies_path,
+            "cookiefile": temp_cookie_path,
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
