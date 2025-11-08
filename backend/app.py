@@ -129,7 +129,7 @@ def download_audio():
         "retries": 3,
         "format": "bestaudio/best",
         "outtmpl": outfile.replace(".mp3", ""),
-        "ffmpeg_location": "C:\\ffmpeg\\bin",  # <— ensure correct path
+        "ffmpeg_location": "/usr/bin/ffmpeg", # <— ensure correct path
         "postprocessors": [{
             "key": "FFmpegExtractAudio",
             "preferredcodec": "mp3",
