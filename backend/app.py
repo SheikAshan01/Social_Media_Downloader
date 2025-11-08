@@ -4,6 +4,8 @@ import yt_dlp
 import os
 import shutil
 import tempfile
+import uuid
+
 
 # Read-only secret file path on Render
 secret_cookie_path = "/etc/secrets/instagram.txt"
