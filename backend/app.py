@@ -38,7 +38,7 @@ def fetch():
             "extract_flat": False,
             "noplaylist": True,
             "geo_bypass": True,
-            "cookies": cookies_path if os.path.exists(cookies_path) else None,
+            "cookiefile": cookies_path,
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
